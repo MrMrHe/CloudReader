@@ -26,23 +26,29 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    // 注释下面代码(签名配置)
+    //添加签名文件配置
     signingConfigs {
-        if (propertyHaveSigningConfigs) {
-            debug {
-                storeFile file(pStoreFile)
-                storePassword pStorePassword
-                keyAlias pKeyAlias
-                keyPassword pKeyPassword
-            }
+        mysigns {
+            keyAlias 'zjandroid'
+            keyPassword '123456'
+            storeFile file('/Users/zhoujian/AndroidStudioProjects/BuglyDemo/zhoujian.jks')
+            //storeFile file('zhoujian.jks')
+            storePassword '123456'
+        }
+    }
 
-            release {
-                storeFile file(pStoreFile)
-                storePassword pStorePassword
-                keyAlias pKeyAlias
-                keyPassword pKeyPassword
-            }
+
+    buildTypes {
+        release {
+            minifyEnabled false //是否启用混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.mysigns
+            renderscriptDebuggable false
+            minifyEnabled false
+            pseudoLocalesEnabled false
+            zipAlignEnabled true
         }
     }
 
